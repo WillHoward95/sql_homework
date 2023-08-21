@@ -8,10 +8,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/get", require("./routes/get"));
-app.use("/delete", require("./routes/delete"));
-app.use("/add", require("./routes/add"));
-app.use("/update", require("./routes/update"));
+app.use("/get", require("./routes/getAll"));
+app.use("/car", require("./routes/car"));
+app.use("/user", require("./routes/user"));
 
 const port = process.env.PORT || 6001;
 app.listen(port, () => {
