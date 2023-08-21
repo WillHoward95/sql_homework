@@ -7,12 +7,18 @@ router.delete("/car/:id", async (req, res) => {
 
   if (isNaN(id)) {
     res.send({ status: 0, error: "invalid ID" });
+    return;
   }
 
-  await asyncMySQL(`DELETE FROM cars_table 
-                                    WHERE id LIKE ${id}`);
+  const toDelete = await asyncMySQL(`SELECT id, year, make, model, type
+                                          FROM cars_table
+                                            WHERE id LIKE ${id}`);
 
-  res.send({ status: 1 });
+  await asyncMySQL(`DELETE FROM cars_table 
+                        WHERE id LIKE ${id}`);
+
+  res.send({ status: 1, deleted: toDelete });
+  return;
 });
 
 module.exports = router;

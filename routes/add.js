@@ -16,6 +16,7 @@ router.post("/car", async (req, res) => {
     typeof type !== "string"
   ) {
     res.send({ status: 0, error: "incomplete info" });
+    return;
   }
 
   try {
@@ -24,8 +25,10 @@ router.post("/car", async (req, res) => {
                           VALUES
                             ("${year}", "${make}", "${model}", "${type}")`);
     res.send({ status: 1 });
+    return;
   } catch (error) {
     res.send({ status: 0, error: "duplicate entry" });
+    return;
   }
 });
 
