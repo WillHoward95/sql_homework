@@ -11,7 +11,6 @@ router.post("/", async (req, res) => {
     res.send({ status: 1, userId: result.insertId });
     return;
   } catch (e) {
-    s;
     res.send({ status: 0, error: e.sqlMessage });
     return;
   }
