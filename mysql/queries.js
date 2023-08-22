@@ -30,20 +30,8 @@ module.exports = {
                 FROM cars_table
                     WHERE id LIKE ${id}`;
   },
-  updateYear: (id, year) => {
-    return `UPDATE cars_table SET year = "${year}"
-                WHERE id LIKE "${id}";`;
-  },
-  updateModel: (id, model) => {
-    return `UPDATE cars_table SET model = "${model}"
-                WHERE id LIKE "${id}";`;
-  },
-  updateMake: (id, make) => {
-    return `UPDATE cars_table SET make = "${make}"
-                WHERE id LIKE "${id}";`;
-  },
-  updateType: (id, type) => {
-    return `UPDATE cars_table SET type = "${type}"
+  updateCar: (id, key, value) => {
+    return `UPDATE cars_table SET ${key} = "${value}"
                 WHERE id LIKE "${id}";`;
   },
   getAllCars: () => {

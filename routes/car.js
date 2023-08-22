@@ -7,10 +7,7 @@ const {
   selectToDelete,
   deleteCar,
   selectToUpdate,
-  updateYear,
-  updateModel,
-  updateMake,
-  updateType,
+  updateCar,
 } = require("../mysql/queries");
 
 router.post("/", async (req, res) => {
@@ -98,7 +95,7 @@ router.patch("/:id", async (req, res) => {
   try {
     if (year) {
       if (typeof year === "number") {
-        await asyncMySQL(updateYear(id, year));
+        await asyncMySQL(updateCar(id, "year", year));
         newData.year = year;
       } else {
         res.send({ status: 0, error: "bad data" });
@@ -107,7 +104,7 @@ router.patch("/:id", async (req, res) => {
     }
     if (make) {
       if (typeof make === "string") {
-        await asyncMySQL(updateMake(id, make));
+        await asyncMySQL(updateCar(id, "make", make));
         newData.make = make;
       } else {
         res.send({ status: 0, error: "bad data" });
@@ -116,7 +113,7 @@ router.patch("/:id", async (req, res) => {
     }
     if (model) {
       if (typeof model === "string") {
-        await asyncMySQL(updateModel(id, model));
+        await asyncMySQL(updateCar(id, "model", model));
         newData.model = model;
       } else {
         res.send({ status: 0, error: "bad data" });
@@ -125,13 +122,15 @@ router.patch("/:id", async (req, res) => {
     }
     if (type) {
       if (typeof type === "string") {
-        await asyncMySQL(updateType(id, type));
+        console.log("test");
+        await asyncMySQL(updateCar(id, "type", type));
         newData.type = type;
       } else {
         res.send({ status: 0, error: "bad data" });
         return;
       }
     }
+    console.log(newData);
   } catch (error) {
     res.send({ status: 0, error: error.sqlMessage });
     return;
