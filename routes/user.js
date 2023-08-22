@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const asyncMySQL = require("../mysql/connection");
-const { addUser, getCarByUser } = require("../mysql/queries");
+const { addUser } = require("../mysql/queries");
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
